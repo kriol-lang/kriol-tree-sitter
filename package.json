@@ -1,0 +1,33 @@
+{
+  "name": "tree-sitter-kriol",
+  "version": "0.1.0",
+  "description": "KriolLang grammar for tree-sitter",
+  "main": "bindings/node",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kriol-lang/kriol-tree-sitter.git"
+  },
+  "keywords": [
+    "incremental",
+    "parsing",
+    "tree-sitter",
+    "kriol"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.25.0"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.kriol",
+      "file-types": [
+        "kr",
+        "kriol"
+      ]
+    }
+  ]
+}

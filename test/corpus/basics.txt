@@ -1,0 +1,147 @@
+==================
+Function and calls
+==================
+
+fn quad(num x) num {
+  divolvi x * x;
+}
+
+fn inisiu() {
+  num r = quad(4.0);
+  mostran(r);
+}
+
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list
+      (parameter
+        type: (type)
+        name: (identifier)))
+    return_type: (type)
+    body: (compound_statement
+      (return_statement
+        value: (binary_expression
+          left: (identifier)
+          right: (identifier)))))
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (compound_statement
+      (variable_declaration
+        type: (type)
+        declarator: (identifier)
+        value: (call_expression
+          function: (identifier)
+          arguments: (argument_list
+            (literal
+              (float)))))
+      (expression_statement
+        (call_expression
+          arguments: (argument_list
+            (identifier)))))))
+
+==================
+Control flow
+==================
+
+fn inisiu() {
+  nter i = 0;
+  pa i = 0; i < 5; i += 1 {
+    si i == 3 {
+      kontinua;
+    } sinon {
+      mostra(i);
+    }
+  }
+}
+
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (compound_statement
+      (variable_declaration
+        type: (type)
+        declarator: (identifier)
+        value: (literal
+          (integer)))
+      (for_statement
+        initializer: (assignment_expression
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (literal
+            (integer)))
+        condition: (binary_expression
+          left: (identifier)
+          right: (literal
+            (integer)))
+        update: (assignment_expression
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (literal
+            (integer)))
+        body: (compound_statement
+          (if_statement
+            condition: (binary_expression
+              left: (identifier)
+              right: (literal
+                (integer)))
+            consequence: (compound_statement
+              (continue_statement))
+            alternative: (compound_statement
+              (expression_statement
+                (call_expression
+                  arguments: (argument_list
+                    (identifier)))))))))))
+
+==================
+Arrays and fstrings
+==================
+
+fn inisiu() {
+  nter[3] nums = [0] * 3;
+  nums[1] = 7;
+  mostran(f"{nums[1]}");
+}
+
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (compound_statement
+      (variable_declaration
+        type: (type)
+        declarator: (array_declarator
+          size: (integer)
+          name: (identifier))
+        value: (array_repeat_expression
+          value: (array_literal
+            (literal
+              (integer)))
+          count: (integer)))
+      (expression_statement
+        (assignment_expression
+          left: (array_access_expression
+            array: (identifier)
+            index: (literal
+              (integer)))
+          operator: (assignment_operator)
+          right: (literal
+            (integer))))
+      (expression_statement
+        (call_expression
+          arguments: (argument_list
+            (literal
+              (fstring
+                (interpolation
+                  (array_access_expression
+                    array: (identifier)
+                    index: (literal
+                      (integer))))))))))))

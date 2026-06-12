@@ -1,0 +1,38 @@
+{
+  "grammars": [
+    {
+      "name": "kriol",
+      "camelcase": "Kriol",
+      "title": "Kriol",
+      "scope": "source.kriol",
+      "file-types": [
+        "kr",
+        "kriol"
+      ],
+      "injection-regex": "^kriol$",
+      "class-name": "TreeSitterKriol"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "KriolLang grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "KriolLang contributors"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/kriol-lang/kriol-tree-sitter"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "node": true,
+    "rust": true,
+    "python": true,
+    "go": true,
+    "swift": true,
+    "zig": false
+  }
+}
