@@ -145,3 +145,125 @@ fn inisiu() {
                     array: (identifier)
                     index: (literal
                       (integer))))))))))))
+
+==================
+Molda and primitive types
+==================
+
+molda Enderesu {
+  textu rua;
+  i32 numero;
+}
+
+molda Pessoa {
+  textu nomi;
+  Enderesu[2] enderesus;
+  u64 id;
+}
+
+fn inisiu() {
+  Pessoa pessoa = Pessoa::{
+    nomi: "Ana",
+    enderesus: <Enderesu>[
+      Enderesu::{rua: "antigu", numero: 10},
+      Enderesu::{rua: "nobu", numero: 44},
+    ],
+    id: 1,
+  };
+  pessoa.enderesus[0].numero += 5;
+  f32 ratio = 1.5;
+  usize count = 3;
+}
+
+---
+
+(source_file
+  (molda_declaration
+    name: (type_identifier)
+    (molda_field_declaration
+      type: (type)
+      declarator: (identifier))
+    (molda_field_declaration
+      type: (type)
+      declarator: (identifier)))
+  (molda_declaration
+    name: (type_identifier)
+    (molda_field_declaration
+      type: (type)
+      declarator: (identifier))
+    (molda_field_declaration
+      type: (type
+        (type_identifier))
+      declarator: (array_declarator
+        size: (integer)
+        name: (identifier)))
+    (molda_field_declaration
+      type: (type)
+      declarator: (identifier)))
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (compound_statement
+      (variable_declaration
+        type: (type
+          (type_identifier))
+        declarator: (identifier)
+        value: (record_literal
+          type: (type_identifier)
+          (record_field_initializer
+            name: (identifier)
+            value: (literal
+              (string)))
+          (record_field_initializer
+            name: (identifier)
+            value: (typed_array_literal
+              type: (type
+                (type_identifier))
+              value: (array_literal
+                (record_literal
+                  type: (type_identifier)
+                  (record_field_initializer
+                    name: (identifier)
+                    value: (literal
+                      (string)))
+                  (record_field_initializer
+                    name: (identifier)
+                    value: (literal
+                      (integer))))
+                (record_literal
+                  type: (type_identifier)
+                  (record_field_initializer
+                    name: (identifier)
+                    value: (literal
+                      (string)))
+                  (record_field_initializer
+                    name: (identifier)
+                    value: (literal
+                      (integer)))))))
+          (record_field_initializer
+            name: (identifier)
+            value: (literal
+              (integer)))))
+      (expression_statement
+        (assignment_expression
+          left: (member_access_expression
+            object: (array_access_expression
+              array: (member_access_expression
+                object: (identifier)
+                member: (identifier))
+              index: (literal
+                (integer)))
+            member: (identifier))
+          operator: (assignment_operator)
+          right: (literal
+            (integer))))
+      (variable_declaration
+        type: (type)
+        declarator: (identifier)
+        value: (literal
+          (float)))
+      (variable_declaration
+        type: (type)
+        declarator: (identifier)
+        value: (literal
+          (integer))))))

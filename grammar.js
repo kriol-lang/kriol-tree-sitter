@@ -41,6 +41,7 @@ module.exports = grammar({
       $.sai_statement,
       $.konfirma_statement,
       $.function_declaration,
+      $.molda_declaration,
       $.variable_declaration,
       $.import_statement,
     ),
@@ -101,12 +102,36 @@ module.exports = grammar({
       ']',
     ),
 
+    typed_array_literal: $ => seq(
+      '<',
+      field('type', $.type),
+      '>',
+      field('value', $.array_literal),
+    ),
+
     function_declaration: $ => seq(
       'fn',
       field('name', $.identifier),
       field('parameters', $.parameter_list),
       optional(field('return_type', $.type)),
       field('body', $.compound_statement),
+    ),
+
+    molda_declaration: $ => seq(
+      'molda',
+      field('name', $.type_identifier),
+      '{',
+      repeat($.molda_field_declaration),
+      '}',
+    ),
+
+    molda_field_declaration: $ => seq(
+      field('type', $.type),
+      field('declarator', choice(
+        $.identifier,
+        $.array_declarator,
+      )),
+      ';',
     ),
 
     parameter_list: $ => seq(
@@ -195,7 +220,11 @@ module.exports = grammar({
       $.unary_expression,
       $.call_expression,
       $.array_access_expression,
+      $.member_access_expression,
+      $.qualified_access_expression,
       $.parenthesized_expression,
+      $.record_literal,
+      $.typed_array_literal,
       $.identifier,
       $.literal,
     ),
@@ -204,6 +233,7 @@ module.exports = grammar({
       field('left', choice(
         $.identifier,
         $.array_access_expression,
+        $.member_access_expression,
         $.parenthesized_expression,
       )),
       field('operator', $.assignment_operator),
@@ -241,6 +271,8 @@ module.exports = grammar({
     call_expression: $ => prec(PREC.CALL, seq(
       field('function', choice(
         $.identifier,
+        $.member_access_expression,
+        $.qualified_access_expression,
         'mostra',
         'mostran',
       )),
@@ -258,16 +290,63 @@ module.exports = grammar({
     ),
 
     array_access_expression: $ => prec(PREC.CALL, seq(
-      field('array', $.identifier),
+      field('array', choice(
+        $.identifier,
+        $.member_access_expression,
+        $.qualified_access_expression,
+        $.parenthesized_expression,
+      )),
       '[',
       field('index', $.expression),
       ']',
+    )),
+
+    member_access_expression: $ => prec(PREC.CALL, seq(
+      field('object', choice(
+        $.identifier,
+        $.array_access_expression,
+        $.member_access_expression,
+        $.qualified_access_expression,
+        $.parenthesized_expression,
+      )),
+      '.',
+      field('member', $.identifier),
+    )),
+
+    qualified_access_expression: $ => prec(PREC.CALL, seq(
+      field('qualifier', choice(
+        $.identifier,
+        $.type_identifier,
+        $.member_access_expression,
+        $.qualified_access_expression,
+        $.parenthesized_expression,
+      )),
+      '::',
+      field('member', $.identifier),
     )),
 
     parenthesized_expression: $ => seq(
       '(',
       $.expression,
       ')',
+    ),
+
+    record_literal: $ => seq(
+      field('type', $.type_identifier),
+      '::',
+      '{',
+      optional(seq(
+        $.record_field_initializer,
+        repeat(seq(',', $.record_field_initializer)),
+        optional(','),
+      )),
+      '}',
+    ),
+
+    record_field_initializer: $ => seq(
+      field('name', $.identifier),
+      ':',
+      field('value', $.initializer),
     ),
 
     literal: $ => choice(
@@ -310,12 +389,26 @@ module.exports = grammar({
       'nter',
       'bool',
       'textu',
+      'i8',
+      'i16',
+      'i32',
+      'i64',
+      'u8',
+      'u16',
+      'u32',
+      'u64',
+      'f32',
+      'f64',
+      'isize',
+      'usize',
+      $.type_identifier,
     ),
 
     boolean: _ => choice('sin', 'nau'),
-    float: _ => /\d+\.\d+/,
-    integer: _ => /\d+/,
-    identifier: _ => /[A-Za-z_][A-Za-z0-9_]*/,
+    float: _ => /[+-]?\d+\.\d+/,
+    integer: _ => /[+-]?\d+/,
+    type_identifier: _ => /[A-Z][A-Za-z0-9_]*/,
+    identifier: _ => /[a-z_][A-Za-z0-9_]*/,
 
     comment: _ => token(choice(
       seq('//', /[^\n]*/),
