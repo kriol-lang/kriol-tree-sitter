@@ -44,13 +44,6 @@
   "nau"
 ] @constant.builtin.boolean
 
-[
-  "mostra"
-  "mostran"
-  "sai"
-  "konfirma"
-] @function.builtin
-
 (function_declaration
   name: (identifier) @function)
 
@@ -59,6 +52,10 @@
 
 (call_expression
   function: (identifier) @function.call)
+
+(call_expression
+  function: (identifier) @function.builtin
+  (#any-of? @function.builtin "mostra" "mostran" "toma" "sai" "konfirma"))
 
 (record_literal
   type: (type_identifier) @type)

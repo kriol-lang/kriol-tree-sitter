@@ -40,6 +40,7 @@ fn inisiu() {
               (float)))))
       (expression_statement
         (call_expression
+          function: (identifier)
           arguments: (argument_list
             (identifier)))))))
 
@@ -49,11 +50,13 @@ Control flow
 
 fn inisiu() {
   nter i = 0;
-  pa i = 0; i < 5; i += 1 {
-    si i == 3 {
+  pa nter j = 0; j < 5; j += 1 {
+    si nter res = j; res == 3 {
       kontinua;
+    } sinon si res == 4 {
+      mostra(res);
     } sinon {
-      mostra(i);
+      mostra(res);
     }
   }
 }
@@ -71,11 +74,12 @@ fn inisiu() {
         value: (literal
           (integer)))
       (for_statement
-        initializer: (assignment_expression
-          left: (identifier)
-          operator: (assignment_operator)
-          right: (literal
-            (integer)))
+        initializer: (control_initializer
+          (variable_declaration_initializer
+            type: (type)
+            declarator: (identifier)
+            value: (literal
+              (integer))))
         condition: (binary_expression
           left: (identifier)
           right: (literal
@@ -87,6 +91,9 @@ fn inisiu() {
             (integer)))
         body: (compound_statement
           (if_statement
+            initializer: (if_variable_declaration_initializer
+              declarator: (identifier)
+              value: (identifier))
             condition: (binary_expression
               left: (identifier)
               right: (literal
@@ -94,10 +101,23 @@ fn inisiu() {
             consequence: (compound_statement
               (continue_statement))
             alternative: (compound_statement
-              (expression_statement
-                (call_expression
-                  arguments: (argument_list
-                    (identifier)))))))))))
+              (if_statement
+                condition: (binary_expression
+                  left: (identifier)
+                  right: (literal
+                    (integer)))
+                consequence: (compound_statement
+                  (expression_statement
+                    (call_expression
+                      function: (identifier)
+                      arguments: (argument_list
+                        (identifier)))))
+                alternative: (compound_statement
+                  (expression_statement
+                    (call_expression
+                      function: (identifier)
+                      arguments: (argument_list
+                        (identifier)))))))))))))
 
 ==================
 Arrays and fstrings
@@ -137,6 +157,7 @@ fn inisiu() {
             (integer))))
       (expression_statement
         (call_expression
+          function: (identifier)
           arguments: (argument_list
             (literal
               (fstring
@@ -145,6 +166,52 @@ fn inisiu() {
                     array: (identifier)
                     index: (literal
                       (integer))))))))))))
+
+=============================
+Prelude builtins are calls
+=============================
+
+fn inisiu() {
+  textu nomi = toma("Nomi: ");
+  mostran(nomi);
+  konfirma(nomi != "");
+  sai(0);
+}
+
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (compound_statement
+      (variable_declaration
+        type: (type)
+        declarator: (identifier)
+        value: (call_expression
+          function: (identifier)
+          arguments: (argument_list
+            (literal
+              (string)))))
+      (expression_statement
+        (call_expression
+          function: (identifier)
+          arguments: (argument_list
+            (identifier))))
+      (expression_statement
+        (call_expression
+          function: (identifier)
+          arguments: (argument_list
+            (binary_expression
+              left: (identifier)
+              right: (literal
+                (string))))))
+      (expression_statement
+        (call_expression
+          function: (identifier)
+          arguments: (argument_list
+            (literal
+              (integer))))))))
 
 ==================
 Molda and primitive types

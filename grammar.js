@@ -38,8 +38,6 @@ module.exports = grammar({
       $.break_statement,
       $.continue_statement,
       $.return_statement,
-      $.sai_statement,
-      $.konfirma_statement,
       $.function_declaration,
       $.molda_declaration,
       $.variable_declaration,
@@ -53,13 +51,7 @@ module.exports = grammar({
 
     variable_declaration: $ => choice(
       seq(
-        field('type', $.type),
-        field('declarator', choice(
-          $.identifier,
-          $.array_declarator,
-        )),
-        '=',
-        field('value', $.initializer),
+        $.variable_declaration_initializer,
         ';',
       ),
       seq(
@@ -71,6 +63,31 @@ module.exports = grammar({
         )),
         ';',
       ),
+    ),
+
+    variable_declaration_initializer: $ => seq(
+        field('type', $.type),
+        field('declarator', choice(
+          $.identifier,
+          $.array_declarator,
+        )),
+        '=',
+        field('value', $.initializer),
+    ),
+
+    control_initializer: $ => choice(
+      $.variable_declaration_initializer,
+      $.expression,
+    ),
+
+    if_variable_declaration_initializer: $ => seq(
+        field('type', $._builtin_type),
+        field('declarator', choice(
+          $.identifier,
+          $.array_declarator,
+        )),
+        '=',
+        field('value', $.initializer),
     ),
 
     array_declarator: $ => seq(
@@ -157,6 +174,10 @@ module.exports = grammar({
 
     if_statement: $ => prec.right(seq(
       'si',
+      optional(seq(
+        field('initializer', $.if_variable_declaration_initializer),
+        ';',
+      )),
       field('condition', $.expression),
       field('consequence', $.compound_statement),
       optional(seq(
@@ -176,7 +197,7 @@ module.exports = grammar({
 
     for_statement: $ => seq(
       'pa',
-      field('initializer', $.expression),
+      field('initializer', $.control_initializer),
       ';',
       field('condition', $.expression),
       ';',
@@ -190,22 +211,6 @@ module.exports = grammar({
     return_statement: $ => seq(
       'divolvi',
       optional(field('value', $.expression)),
-      ';',
-    ),
-
-    sai_statement: $ => seq(
-      'sai',
-      '(',
-      optional(field('value', $.expression)),
-      ')',
-      ';',
-    ),
-
-    konfirma_statement: $ => seq(
-      'konfirma',
-      '(',
-      optional(field('value', $.expression)),
-      ')',
       ';',
     ),
 
@@ -273,8 +278,6 @@ module.exports = grammar({
         $.identifier,
         $.member_access_expression,
         $.qualified_access_expression,
-        'mostra',
-        'mostran',
       )),
       field('arguments', $.argument_list),
     )),
@@ -384,7 +387,12 @@ module.exports = grammar({
       token(seq("'", repeat(choice(/[^'\\\n]/, /\\./)), "'")),
     ),
 
-    type: _ => choice(
+    type: $ => choice(
+      $._builtin_type,
+      $.type_identifier,
+    ),
+
+    _builtin_type: _ => choice(
       'num',
       'nter',
       'bool',
@@ -401,7 +409,6 @@ module.exports = grammar({
       'f64',
       'isize',
       'usize',
-      $.type_identifier,
     ),
 
     boolean: _ => choice('sin', 'nau'),
