@@ -31,13 +31,14 @@ fn inisiu() {
     parameters: (parameter_list)
     body: (compound_statement
       (variable_declaration
-        type: (type)
-        declarator: (identifier)
-        value: (call_expression
-          function: (identifier)
-          arguments: (argument_list
-            (literal
-              (float)))))
+        (variable_declaration_initializer
+          type: (type)
+          declarator: (identifier)
+          value: (call_expression
+            function: (identifier)
+            arguments: (argument_list
+              (literal
+                (float))))))
       (expression_statement
         (call_expression
           function: (identifier)
@@ -69,10 +70,11 @@ fn inisiu() {
     parameters: (parameter_list)
     body: (compound_statement
       (variable_declaration
-        type: (type)
-        declarator: (identifier)
-        value: (literal
-          (integer)))
+        (variable_declaration_initializer
+          type: (type)
+          declarator: (identifier)
+          value: (literal
+            (integer))))
       (for_statement
         initializer: (control_initializer
           (variable_declaration_initializer
@@ -100,24 +102,23 @@ fn inisiu() {
                 (integer)))
             consequence: (compound_statement
               (continue_statement))
-            alternative: (compound_statement
-              (if_statement
-                condition: (binary_expression
-                  left: (identifier)
-                  right: (literal
-                    (integer)))
-                consequence: (compound_statement
-                  (expression_statement
-                    (call_expression
-                      function: (identifier)
-                      arguments: (argument_list
-                        (identifier)))))
-                alternative: (compound_statement
-                  (expression_statement
-                    (call_expression
-                      function: (identifier)
-                      arguments: (argument_list
-                        (identifier)))))))))))))
+            alternative: (if_statement
+              condition: (binary_expression
+                left: (identifier)
+                right: (literal
+                  (integer)))
+              consequence: (compound_statement
+                (expression_statement
+                  (call_expression
+                    function: (identifier)
+                    arguments: (argument_list
+                      (identifier)))))
+              alternative: (compound_statement
+                (expression_statement
+                  (call_expression
+                    function: (identifier)
+                    arguments: (argument_list
+                      (identifier))))))))))))
 
 ==================
 Arrays and fstrings
@@ -137,15 +138,16 @@ fn inisiu() {
     parameters: (parameter_list)
     body: (compound_statement
       (variable_declaration
-        type: (type)
-        declarator: (array_declarator
-          size: (integer)
-          name: (identifier))
-        value: (array_repeat_expression
-          value: (array_literal
-            (literal
-              (integer)))
-          count: (integer)))
+        (variable_declaration_initializer
+          type: (type)
+          declarator: (array_declarator
+            size: (integer)
+            name: (identifier))
+          value: (array_repeat_expression
+            value: (array_literal
+              (literal
+                (integer)))
+            count: (integer))))
       (expression_statement
         (assignment_expression
           left: (array_access_expression
@@ -186,13 +188,14 @@ fn inisiu() {
     parameters: (parameter_list)
     body: (compound_statement
       (variable_declaration
-        type: (type)
-        declarator: (identifier)
-        value: (call_expression
-          function: (identifier)
-          arguments: (argument_list
-            (literal
-              (string)))))
+        (variable_declaration_initializer
+          type: (type)
+          declarator: (identifier)
+          value: (call_expression
+            function: (identifier)
+            arguments: (argument_list
+              (literal
+                (string))))))
       (expression_statement
         (call_expression
           function: (identifier)
@@ -272,45 +275,46 @@ fn inisiu() {
     parameters: (parameter_list)
     body: (compound_statement
       (variable_declaration
-        type: (type
-          (type_identifier))
-        declarator: (identifier)
-        value: (record_literal
-          type: (type_identifier)
-          (record_field_initializer
-            name: (identifier)
-            value: (literal
-              (string)))
-          (record_field_initializer
-            name: (identifier)
-            value: (typed_array_literal
-              type: (type
-                (type_identifier))
-              value: (array_literal
-                (record_literal
-                  type: (type_identifier)
-                  (record_field_initializer
-                    name: (identifier)
-                    value: (literal
-                      (string)))
-                  (record_field_initializer
-                    name: (identifier)
-                    value: (literal
-                      (integer))))
-                (record_literal
-                  type: (type_identifier)
-                  (record_field_initializer
-                    name: (identifier)
-                    value: (literal
-                      (string)))
-                  (record_field_initializer
-                    name: (identifier)
-                    value: (literal
-                      (integer)))))))
-          (record_field_initializer
-            name: (identifier)
-            value: (literal
-              (integer)))))
+        (variable_declaration_initializer
+          type: (type
+            (type_identifier))
+          declarator: (identifier)
+          value: (record_literal
+            type: (type_identifier)
+            (record_field_initializer
+              name: (identifier)
+              value: (literal
+                (string)))
+            (record_field_initializer
+              name: (identifier)
+              value: (typed_array_literal
+                type: (type
+                  (type_identifier))
+                value: (array_literal
+                  (record_literal
+                    type: (type_identifier)
+                    (record_field_initializer
+                      name: (identifier)
+                      value: (literal
+                        (string)))
+                    (record_field_initializer
+                      name: (identifier)
+                      value: (literal
+                        (integer))))
+                  (record_literal
+                    type: (type_identifier)
+                    (record_field_initializer
+                      name: (identifier)
+                      value: (literal
+                        (string)))
+                    (record_field_initializer
+                      name: (identifier)
+                      value: (literal
+                        (integer)))))))
+            (record_field_initializer
+              name: (identifier)
+              value: (literal
+                (integer))))))
       (expression_statement
         (assignment_expression
           left: (member_access_expression
@@ -325,12 +329,14 @@ fn inisiu() {
           right: (literal
             (integer))))
       (variable_declaration
-        type: (type)
-        declarator: (identifier)
-        value: (literal
-          (float)))
+        (variable_declaration_initializer
+          type: (type)
+          declarator: (identifier)
+          value: (literal
+            (float))))
       (variable_declaration
-        type: (type)
-        declarator: (identifier)
-        value: (literal
-          (integer))))))
+        (variable_declaration_initializer
+          type: (type)
+          declarator: (identifier)
+          value: (literal
+            (integer)))))))
