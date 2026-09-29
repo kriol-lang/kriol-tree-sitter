@@ -104,9 +104,11 @@ module.exports = grammar({
     ),
 
     array_repeat_expression: $ => seq(
-      field('value', $.array_literal),
-      '*',
+      '[',
+      field('value', $.expression),
+      ';',
       field('count', $.integer),
+      ']',
     ),
 
     array_literal: $ => seq(

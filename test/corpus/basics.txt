@@ -125,7 +125,7 @@ Arrays and fstrings
 ==================
 
 fn inisiu() {
-  nter[3] nums = [0] * 3;
+  nter[3] nums = [0; 3];
   nums[1] = 7;
   mostran(f"{nums[1]}");
 }
@@ -144,9 +144,8 @@ fn inisiu() {
             size: (integer)
             name: (identifier))
           value: (array_repeat_expression
-            value: (array_literal
-              (literal
-                (integer)))
+            value: (literal
+              (integer))
             count: (integer))))
       (expression_statement
         (assignment_expression

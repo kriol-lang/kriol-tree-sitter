@@ -238,7 +238,7 @@
         "required": true,
         "types": [
           {
-            "type": "array_literal",
+            "type": "expression",
             "named": true
           }
         ]

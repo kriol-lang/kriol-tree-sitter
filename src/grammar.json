@@ -283,16 +283,20 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "STRING",
+          "value": "["
+        },
+        {
           "type": "FIELD",
           "name": "value",
           "content": {
             "type": "SYMBOL",
-            "name": "array_literal"
+            "name": "expression"
           }
         },
         {
           "type": "STRING",
-          "value": "*"
+          "value": ";"
         },
         {
           "type": "FIELD",
@@ -301,6 +305,10 @@
             "type": "SYMBOL",
             "name": "integer"
           }
+        },
+        {
+          "type": "STRING",
+          "value": "]"
         }
       ]
     },
