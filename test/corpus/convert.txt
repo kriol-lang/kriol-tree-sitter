@@ -1,0 +1,66 @@
+==================
+Text to number conversion
+==================
+
+fn inisiu() : Erru {
+  int a = tenta int::konverti(toma("n: "));
+  num b = num::konverti("2.5") sinon 0.0;
+  si int::konverti("3") sinon 0 > 2 {
+    mostran(a);
+  }
+}
+
+---
+
+(source_file
+  (function_declaration
+    (identifier)
+    (parameter_list)
+    (type_identifier)
+    (compound_statement
+      (variable_declaration
+        (variable_declaration_initializer
+          (type)
+          (identifier)
+          (try_expression
+            (call_expression
+              (qualified_access_expression
+                (identifier))
+              (argument_list
+                (call_expression
+                  (identifier)
+                  (argument_list
+                    (literal
+                      (string)))))))))
+      (variable_declaration
+        (variable_declaration_initializer
+          (type)
+          (identifier)
+          (catch_expression
+            (call_expression
+              (qualified_access_expression
+                (identifier))
+              (argument_list
+                (literal
+                  (string))))
+            (literal
+              (float)))))
+      (if_statement
+        (catch_expression
+          (call_expression
+            (qualified_access_expression
+              (identifier))
+            (argument_list
+              (literal
+                (string))))
+          (binary_expression
+            (literal
+              (integer))
+            (literal
+              (integer))))
+        (compound_statement
+          (expression_statement
+            (call_expression
+              (identifier)
+              (argument_list
+                (identifier)))))))))

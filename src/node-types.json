@@ -1070,12 +1070,52 @@
         "required": true,
         "types": [
           {
+            "type": "bool",
+            "named": false
+          },
+          {
+            "type": "f32",
+            "named": false
+          },
+          {
+            "type": "f64",
+            "named": false
+          },
+          {
+            "type": "i16",
+            "named": false
+          },
+          {
+            "type": "i32",
+            "named": false
+          },
+          {
+            "type": "i64",
+            "named": false
+          },
+          {
+            "type": "i8",
+            "named": false
+          },
+          {
             "type": "identifier",
             "named": true
           },
           {
+            "type": "int",
+            "named": false
+          },
+          {
+            "type": "isize",
+            "named": false
+          },
+          {
             "type": "member_access_expression",
             "named": true
+          },
+          {
+            "type": "num",
+            "named": false
           },
           {
             "type": "parenthesized_expression",
@@ -1086,8 +1126,32 @@
             "named": true
           },
           {
+            "type": "textu",
+            "named": false
+          },
+          {
             "type": "type_identifier",
             "named": true
+          },
+          {
+            "type": "u16",
+            "named": false
+          },
+          {
+            "type": "u32",
+            "named": false
+          },
+          {
+            "type": "u64",
+            "named": false
+          },
+          {
+            "type": "u8",
+            "named": false
+          },
+          {
+            "type": "usize",
+            "named": false
           }
         ]
       }

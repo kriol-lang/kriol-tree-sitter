@@ -350,6 +350,7 @@ module.exports = grammar({
       field('qualifier', choice(
         $.identifier,
         $.type_identifier,
+        $._builtin_type,
         $.member_access_expression,
         $.qualified_access_expression,
         $.parenthesized_expression,
