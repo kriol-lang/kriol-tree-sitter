@@ -54,7 +54,7 @@
 
 (call_expression
   function: (identifier) @function.builtin
-  (#any-of? @function.builtin "mostra" "mostran" "toma" "sai" "konfirma"))
+  (#any-of? @function.builtin "mostra" "mostran" "toma" "sai" "konfirma" "paniku"))
 
 (record_literal
   type: (type_identifier) @type)
