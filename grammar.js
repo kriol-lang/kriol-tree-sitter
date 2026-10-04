@@ -116,11 +116,20 @@ module.exports = grammar({
     ),
 
     typed_array_literal: $ => seq(
-      '<',
+      '(',
       field('type', $.type),
-      '>',
+      '[',
+      ']',
+      ')',
       field('value', $.array_literal),
     ),
+
+    cast_expression: $ => prec.right(PREC.UNARY, seq(
+      '(',
+      field('type', $.type),
+      ')',
+      field('value', $.expression),
+    )),
 
     function_declaration: $ => seq(
       'fn',
@@ -228,6 +237,7 @@ module.exports = grammar({
       $.catch_expression,
       $.unary_expression,
       $.try_expression,
+      $.cast_expression,
       $.call_expression,
       $.array_access_expression,
       $.member_access_expression,

@@ -1,0 +1,76 @@
+==================
+Explicit casts
+==================
+
+fn inisiu() {
+  int a = (int) 3.9 + 1;
+  num b = (num) a / 2;
+  u8 c = (u8) -(int) b;
+  bool d = (bool) (a - 1);
+  int[3] e = (int[]) [1, 2, 3];
+}
+
+---
+
+(source_file
+  (function_declaration
+    (identifier)
+    (parameter_list)
+    (compound_statement
+      (variable_declaration
+        (variable_declaration_initializer
+          (type)
+          (identifier)
+          (binary_expression
+            (cast_expression
+              (type)
+              (literal
+                (float)))
+            (literal
+              (integer)))))
+      (variable_declaration
+        (variable_declaration_initializer
+          (type)
+          (identifier)
+          (binary_expression
+            (cast_expression
+              (type)
+              (identifier))
+            (literal
+              (integer)))))
+      (variable_declaration
+        (variable_declaration_initializer
+          (type)
+          (identifier)
+          (cast_expression
+            (type)
+            (unary_expression
+              (cast_expression
+                (type)
+                (identifier))))))
+      (variable_declaration
+        (variable_declaration_initializer
+          (type)
+          (identifier)
+          (cast_expression
+            (type)
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (literal
+                  (integer)))))))
+      (variable_declaration
+        (variable_declaration_initializer
+          (type)
+          (array_declarator
+            (integer)
+            (identifier))
+          (typed_array_literal
+            (type)
+            (array_literal
+              (literal
+                (integer))
+              (literal
+                (integer))
+              (literal
+                (integer)))))))))

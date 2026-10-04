@@ -233,7 +233,7 @@ molda Pessoa {
 fn inisiu() {
   Pessoa pessoa = Pessoa::{
     nomi: "Ana",
-    enderesus: <Enderesu>[
+    enderesus: (Enderesu[]) [
       Enderesu::{rua: "antigu", numero: 10},
       Enderesu::{rua: "nobu", numero: 44},
     ],

@@ -20,6 +20,10 @@
         "named": true
       },
       {
+        "type": "cast_expression",
+        "named": true
+      },
+      {
         "type": "catch_expression",
         "named": true
       },
@@ -444,6 +448,32 @@
           },
           {
             "type": "qualified_access_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "cast_expression",
+    "named": true,
+    "fields": {
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
             "named": true
           }
         ]
