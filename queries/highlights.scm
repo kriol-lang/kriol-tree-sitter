@@ -15,6 +15,8 @@
   "para"
   "kontinua"
   "divolvi"
+  "tenta"
+  "lansa"
 ] @keyword.control
 
 [

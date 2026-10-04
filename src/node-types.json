@@ -20,6 +20,10 @@
         "named": true
       },
       {
+        "type": "catch_expression",
+        "named": true
+      },
+      {
         "type": "identifier",
         "named": true
       },
@@ -41,6 +45,10 @@
       },
       {
         "type": "record_literal",
+        "named": true
+      },
+      {
+        "type": "try_expression",
         "named": true
       },
       {
@@ -113,6 +121,10 @@
       },
       {
         "type": "return_statement",
+        "named": true
+      },
+      {
+        "type": "throw_statement",
         "named": true
       },
       {
@@ -439,6 +451,32 @@
     }
   },
   {
+    "type": "catch_expression",
+    "named": true,
+    "fields": {
+      "call": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "fallback": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "compound_statement",
     "named": true,
     "fields": {},
@@ -571,6 +609,16 @@
         "types": [
           {
             "type": "compound_statement",
+            "named": true
+          }
+        ]
+      },
+      "error_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_identifier",
             "named": true
           }
         ]
@@ -1105,6 +1153,38 @@
     "fields": {}
   },
   {
+    "type": "throw_statement",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "try_expression",
+    "named": true,
+    "fields": {
+      "call": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "type",
     "named": true,
     "fields": {},
@@ -1482,6 +1562,10 @@
     "named": false
   },
   {
+    "type": "lansa",
+    "named": false
+  },
+  {
     "type": "molda",
     "named": false
   },
@@ -1515,6 +1599,10 @@
   },
   {
     "type": "sinon",
+    "named": false
+  },
+  {
+    "type": "tenta",
     "named": false
   },
   {

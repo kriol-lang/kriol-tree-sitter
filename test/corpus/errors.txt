@@ -1,0 +1,77 @@
+==================
+Fallible functions, tenta, lansa and sinon
+==================
+
+fn metadi(int a, int b) num : Erru {
+  si b == 0 {
+    lansa Erru::{mensage: "zero"};
+  }
+  divolvi a / b;
+}
+
+fn valida(int n) : Erru {
+  tenta metadi(n, 2);
+  num r = metadi(n, 0) sinon 1.5;
+}
+
+---
+
+(source_file
+  (function_declaration
+    (identifier)
+    (parameter_list
+      (parameter
+        (type)
+        (identifier))
+      (parameter
+        (type)
+        (identifier)))
+    (type)
+    (type_identifier)
+    (compound_statement
+      (if_statement
+        (binary_expression
+          (identifier)
+          (literal
+            (integer)))
+        (compound_statement
+          (throw_statement
+            (record_literal
+              (type_identifier)
+              (record_field_initializer
+                (identifier)
+                (literal
+                  (string)))))))
+      (return_statement
+        (binary_expression
+          (identifier)
+          (identifier)))))
+  (function_declaration
+    (identifier)
+    (parameter_list
+      (parameter
+        (type)
+        (identifier)))
+    (type_identifier)
+    (compound_statement
+      (expression_statement
+        (try_expression
+          (call_expression
+            (identifier)
+            (argument_list
+              (identifier)
+              (literal
+                (integer))))))
+      (variable_declaration
+        (variable_declaration_initializer
+          (type)
+          (identifier)
+          (catch_expression
+            (call_expression
+              (identifier)
+              (argument_list
+                (identifier)
+                (literal
+                  (integer))))
+            (literal
+              (float))))))))

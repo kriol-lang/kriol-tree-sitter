@@ -1,16 +1,17 @@
 const PREC = {
   ASSIGN: 1,
-  OR: 2,
-  AND: 3,
-  EQUALITY: 4,
-  RELATIONAL: 5,
-  BIT_OR: 6,
-  BIT_XOR: 7,
-  BIT_AND: 8,
-  ADD: 9,
-  MULTIPLY: 10,
-  UNARY: 11,
-  CALL: 12,
+  CATCH: 2,
+  OR: 3,
+  AND: 4,
+  EQUALITY: 5,
+  RELATIONAL: 6,
+  BIT_OR: 7,
+  BIT_XOR: 8,
+  BIT_AND: 9,
+  ADD: 10,
+  MULTIPLY: 11,
+  UNARY: 12,
+  CALL: 13,
 };
 
 module.exports = grammar({
@@ -41,6 +42,7 @@ module.exports = grammar({
       $.break_statement,
       $.continue_statement,
       $.return_statement,
+      $.throw_statement,
       $.function_declaration,
       $.molda_declaration,
       $.variable_declaration,
@@ -125,6 +127,7 @@ module.exports = grammar({
       field('name', $.identifier),
       field('parameters', $.parameter_list),
       optional(field('return_type', $.type)),
+      optional(seq(':', field('error_type', $.type_identifier))),
       field('body', $.compound_statement),
     ),
 
@@ -208,6 +211,12 @@ module.exports = grammar({
       ';',
     ),
 
+    throw_statement: $ => seq(
+      'lansa',
+      field('value', $.expression),
+      ';',
+    ),
+
     expression_statement: $ => seq(
       optional($.expression),
       ';',
@@ -216,7 +225,9 @@ module.exports = grammar({
     expression: $ => choice(
       $.assignment_expression,
       $.binary_expression,
+      $.catch_expression,
       $.unary_expression,
+      $.try_expression,
       $.call_expression,
       $.array_access_expression,
       $.member_access_expression,
@@ -265,6 +276,17 @@ module.exports = grammar({
         field('right', $.expression),
       ))),
     ),
+
+    catch_expression: $ => prec.right(PREC.CATCH, seq(
+      field('call', $.expression),
+      'sinon',
+      field('fallback', $.expression),
+    )),
+
+    try_expression: $ => prec.right(PREC.UNARY, seq(
+      'tenta',
+      field('call', $.expression),
+    )),
 
     unary_expression: $ => prec.right(PREC.UNARY, seq(
       field('operator', choice('!', '-', '~')),
