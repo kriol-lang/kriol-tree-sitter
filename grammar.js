@@ -315,6 +315,7 @@ module.exports = grammar({
         $.identifier,
         $.member_access_expression,
         $.qualified_access_expression,
+        $.parenthesized_expression,
       )),
       field('arguments', $.argument_list),
     )),
@@ -347,6 +348,7 @@ module.exports = grammar({
       field('object', choice(
         $.identifier,
         $.array_access_expression,
+        $.call_expression,
         $.member_access_expression,
         $.qualified_access_expression,
         $.parenthesized_expression,
@@ -376,7 +378,6 @@ module.exports = grammar({
 
     record_literal: $ => seq(
       field('type', $.type_identifier),
-      '::',
       '{',
       optional(seq(
         $.record_field_initializer,
@@ -388,7 +389,7 @@ module.exports = grammar({
 
     record_field_initializer: $ => seq(
       field('name', $.identifier),
-      ':',
+      '=',
       field('value', $.initializer),
     ),
 

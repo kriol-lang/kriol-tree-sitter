@@ -487,6 +487,10 @@
             "named": true
           },
           {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
             "type": "qualified_access_expression",
             "named": true
           }
@@ -975,6 +979,10 @@
         "types": [
           {
             "type": "array_access_expression",
+            "named": true
+          },
+          {
+            "type": "call_expression",
             "named": true
           },
           {

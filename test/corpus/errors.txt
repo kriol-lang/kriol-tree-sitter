@@ -4,7 +4,7 @@ Fallible functions, tenta, lansa and sinon
 
 fn metadi(int a, int b) num : Erru {
   si b == 0 {
-    lansa Erru::{mensage: "zero"};
+    lansa Erru{mensage = "zero"};
   }
   divolvi a / b;
 }

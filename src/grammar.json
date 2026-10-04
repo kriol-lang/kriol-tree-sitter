@@ -1840,6 +1840,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "qualified_access_expression"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "parenthesized_expression"
                 }
               ]
             }
@@ -2011,6 +2015,10 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "call_expression"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "member_access_expression"
                 },
                 {
@@ -2123,10 +2131,6 @@
         },
         {
           "type": "STRING",
-          "value": "::"
-        },
-        {
-          "type": "STRING",
           "value": "{"
         },
         {
@@ -2193,7 +2197,7 @@
         },
         {
           "type": "STRING",
-          "value": ":"
+          "value": "="
         },
         {
           "type": "FIELD",

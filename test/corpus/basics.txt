@@ -231,13 +231,13 @@ molda Pessoa {
 }
 
 fn inisiu() {
-  Pessoa pessoa = Pessoa::{
-    nomi: "Ana",
-    enderesus: (Enderesu[]) [
-      Enderesu::{rua: "antigu", numero: 10},
-      Enderesu::{rua: "nobu", numero: 44},
+  Pessoa pessoa = Pessoa{
+    nomi = "Ana",
+    enderesus = (Enderesu[]) [
+      Enderesu{rua = "antigu", numero = 10},
+      Enderesu{rua = "nobu", numero = 44},
     ],
-    id: 1,
+    id = 1,
   };
   pessoa.enderesus[0].numero += 5;
   f32 ratio = 1.5;
