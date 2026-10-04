@@ -50,9 +50,9 @@ Control flow
 ==================
 
 fn inisiu() {
-  nter i = 0;
-  pa nter j = 0; j < 5; j += 1 {
-    si nter res = j; res == 3 {
+  int i = 0;
+  pa int j = 0; j < 5; j += 1 {
+    si int res = j; res == 3 {
       kontinua;
     } sinon si res == 4 {
       mostra(res);
@@ -125,7 +125,7 @@ Arrays and fstrings
 ==================
 
 fn inisiu() {
-  nter[3] nums = [0; 3];
+  int[3] nums = [0; 3];
   nums[1] = 7;
   mostran(f"{nums[1]}");
 }

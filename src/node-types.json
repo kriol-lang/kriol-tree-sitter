@@ -321,6 +321,14 @@
             "named": false
           },
           {
+            "type": "%",
+            "named": false
+          },
+          {
+            "type": "&",
+            "named": false
+          },
+          {
             "type": "&&",
             "named": false
           },
@@ -358,6 +366,14 @@
           },
           {
             "type": ">=",
+            "named": false
+          },
+          {
+            "type": "^",
+            "named": false
+          },
+          {
+            "type": "|",
             "named": false
           },
           {
@@ -692,11 +708,11 @@
             "named": false
           },
           {
-            "type": "isize",
+            "type": "int",
             "named": false
           },
           {
-            "type": "nter",
+            "type": "isize",
             "named": false
           },
           {
@@ -1154,6 +1170,10 @@
           {
             "type": "-",
             "named": false
+          },
+          {
+            "type": "~",
+            "named": false
           }
         ]
       }
@@ -1162,35 +1182,10 @@
   {
     "type": "variable_declaration",
     "named": true,
-    "fields": {
-      "declarator": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "array_declarator",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "type",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "variable_declaration_initializer",
@@ -1278,7 +1273,23 @@
     "named": false
   },
   {
+    "type": "%",
+    "named": false
+  },
+  {
+    "type": "%=",
+    "named": false
+  },
+  {
+    "type": "&",
+    "named": false
+  },
+  {
     "type": "&&",
+    "named": false
+  },
+  {
+    "type": "&=",
     "named": false
   },
   {
@@ -1378,6 +1389,14 @@
     "named": false
   },
   {
+    "type": "^",
+    "named": false
+  },
+  {
+    "type": "^=",
+    "named": false
+  },
+  {
     "type": "bool",
     "named": false
   },
@@ -1385,10 +1404,6 @@
     "type": "comment",
     "named": true,
     "extra": true
-  },
-  {
-    "type": "dipoz",
-    "named": false
   },
   {
     "type": "divolvi",
@@ -1451,6 +1466,10 @@
     "named": false
   },
   {
+    "type": "int",
+    "named": false
+  },
+  {
     "type": "integer",
     "named": true
   },
@@ -1472,10 +1491,6 @@
   },
   {
     "type": "nkuantu",
-    "named": false
-  },
-  {
-    "type": "nter",
     "named": false
   },
   {
@@ -1535,11 +1550,23 @@
     "named": false
   },
   {
+    "type": "|",
+    "named": false
+  },
+  {
+    "type": "|=",
+    "named": false
+  },
+  {
     "type": "||",
     "named": false
   },
   {
     "type": "}",
+    "named": false
+  },
+  {
+    "type": "~",
     "named": false
   }
 ]

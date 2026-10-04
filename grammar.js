@@ -4,10 +4,13 @@ const PREC = {
   AND: 3,
   EQUALITY: 4,
   RELATIONAL: 5,
-  ADD: 6,
-  MULTIPLY: 7,
-  UNARY: 8,
-  CALL: 9,
+  BIT_OR: 6,
+  BIT_XOR: 7,
+  BIT_AND: 8,
+  ADD: 9,
+  MULTIPLY: 10,
+  UNARY: 11,
+  CALL: 12,
 };
 
 module.exports = grammar({
@@ -49,20 +52,9 @@ module.exports = grammar({
       field('path', $.string),
     ),
 
-    variable_declaration: $ => choice(
-      seq(
-        $.variable_declaration_initializer,
-        ';',
-      ),
-      seq(
-        'dipoz',
-        field('type', $.type),
-        field('declarator', choice(
-          $.identifier,
-          $.array_declarator,
-        )),
-        ';',
-      ),
+    variable_declaration: $ => seq(
+      $.variable_declaration_initializer,
+      ';',
     ),
 
     variable_declaration_initializer: $ => seq(
@@ -247,7 +239,7 @@ module.exports = grammar({
       field('right', $.expression),
     )),
 
-    assignment_operator: _ => choice('=', '+=', '-=', '*=', '/='),
+    assignment_operator: _ => choice('=', '+=', '-=', '*=', '/=', '%=', '&=', '|=', '^='),
 
     binary_expression: $ => choice(
       ...[
@@ -259,10 +251,14 @@ module.exports = grammar({
         ['<=', PREC.RELATIONAL],
         ['>', PREC.RELATIONAL],
         ['>=', PREC.RELATIONAL],
+        ['|', PREC.BIT_OR],
+        ['^', PREC.BIT_XOR],
+        ['&', PREC.BIT_AND],
         ['+', PREC.ADD],
         ['-', PREC.ADD],
         ['*', PREC.MULTIPLY],
         ['/', PREC.MULTIPLY],
+        ['%', PREC.MULTIPLY],
       ].map(([operator, precedence]) => prec.left(precedence, seq(
         field('left', $.expression),
         field('operator', operator),
@@ -271,7 +267,7 @@ module.exports = grammar({
     ),
 
     unary_expression: $ => prec.right(PREC.UNARY, seq(
-      field('operator', choice('!', '-')),
+      field('operator', choice('!', '-', '~')),
       field('argument', $.expression),
     )),
 
@@ -396,7 +392,7 @@ module.exports = grammar({
 
     _builtin_type: _ => choice(
       'num',
-      'nter',
+      'int',
       'bool',
       'textu',
       'i8',
