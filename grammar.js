@@ -84,11 +84,15 @@ module.exports = grammar({
         field('value', $.initializer),
     ),
 
+    // `int[2][3] m`: the first size is the outermost dimension.
     array_declarator: $ => seq(
-      '[',
-      field('size', $.integer),
-      ']',
+      repeat1(seq('[', field('size', $.integer), ']')),
       field('name', $.identifier),
+    ),
+
+    _array_value: $ => choice(
+      $.array_repeat_expression,
+      $.array_literal,
     ),
 
     initializer: $ => choice(
@@ -99,7 +103,7 @@ module.exports = grammar({
 
     array_repeat_expression: $ => seq(
       '[',
-      field('value', $.expression),
+      field('value', choice($.expression, $._array_value)),
       ';',
       field('count', $.integer),
       ']',
@@ -108,8 +112,8 @@ module.exports = grammar({
     array_literal: $ => seq(
       '[',
       optional(seq(
-        $.expression,
-        repeat(seq(',', $.expression)),
+        choice($.expression, $._array_value),
+        repeat(seq(',', choice($.expression, $._array_value))),
         optional(','),
       )),
       ']',
@@ -135,7 +139,10 @@ module.exports = grammar({
       'fn',
       field('name', $.identifier),
       field('parameters', $.parameter_list),
-      optional(field('return_type', $.type)),
+      optional(seq(
+        field('return_type', $.type),
+        repeat(seq('[', field('return_size', $.integer), ']')),
+      )),
       optional(seq(':', field('error_type', $.type_identifier))),
       field('body', $.compound_statement),
     ),
@@ -169,6 +176,7 @@ module.exports = grammar({
 
     parameter: $ => seq(
       field('type', $.type),
+      repeat(seq('[', field('size', $.integer), ']')),
       field('name', $.identifier),
     ),
 
@@ -215,7 +223,7 @@ module.exports = grammar({
 
     return_statement: $ => seq(
       'divolvi',
-      optional(field('value', $.expression)),
+      optional(field('value', choice($.expression, $._array_value))),
       ';',
     ),
 
@@ -256,7 +264,7 @@ module.exports = grammar({
         $.parenthesized_expression,
       )),
       field('operator', $.assignment_operator),
-      field('right', $.expression),
+      field('right', choice($.expression, $._array_value)),
     )),
 
     assignment_operator: _ => choice('=', '+=', '-=', '*=', '/=', '%=', '&=', '|=', '^='),
@@ -289,7 +297,7 @@ module.exports = grammar({
     catch_expression: $ => prec.right(PREC.CATCH, seq(
       field('call', $.expression),
       'sinon',
-      field('fallback', $.expression),
+      field('fallback', choice($.expression, $._array_value)),
     )),
 
     try_expression: $ => prec.right(PREC.UNARY, seq(
@@ -314,8 +322,8 @@ module.exports = grammar({
     argument_list: $ => seq(
       '(',
       optional(seq(
-        $.expression,
-        repeat(seq(',', $.expression)),
+        choice($.expression, $._array_value),
+        repeat(seq(',', choice($.expression, $._array_value))),
         optional(','),
       )),
       ')',
@@ -324,6 +332,8 @@ module.exports = grammar({
     array_access_expression: $ => prec(PREC.CALL, seq(
       field('array', choice(
         $.identifier,
+        $.array_access_expression,
+        $.call_expression,
         $.member_access_expression,
         $.qualified_access_expression,
         $.parenthesized_expression,

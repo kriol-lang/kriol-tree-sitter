@@ -377,3 +377,78 @@ fn inisiu() {
               right: (literal
                 (integer))))
           (break_statement))))))
+
+==================
+Multi-dimensional arrays, array parameters and returns
+==================
+
+fn dobra(int[3] v) int[2][3] {
+  divolvi [v, [0; 3]];
+}
+
+fn inisiu() {
+  int[2][3] m = [[1, 2, 3], [0; 3]];
+  m[0] = dobra(m[1])[1];
+}
+
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list
+      (parameter
+        type: (type)
+        size: (integer)
+        name: (identifier)))
+    return_type: (type)
+    return_size: (integer)
+    return_size: (integer)
+    body: (compound_statement
+      (return_statement
+        value: (array_literal
+          (identifier)
+          (array_repeat_expression
+            value: (literal
+              (integer))
+            count: (integer))))))
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (compound_statement
+      (variable_declaration
+        (variable_declaration_initializer
+          type: (type)
+          declarator: (array_declarator
+            size: (integer)
+            size: (integer)
+            name: (identifier))
+          value: (array_literal
+            (array_literal
+              (literal
+                (integer))
+              (literal
+                (integer))
+              (literal
+                (integer)))
+            (array_repeat_expression
+              value: (literal
+                (integer))
+              count: (integer)))))
+      (expression_statement
+        (assignment_expression
+          left: (array_access_expression
+            array: (identifier)
+            index: (literal
+              (integer)))
+          operator: (assignment_operator)
+          right: (array_access_expression
+            array: (call_expression
+              function: (identifier)
+              arguments: (argument_list
+                (array_access_expression
+                  array: (identifier)
+                  index: (literal
+                    (integer)))))
+            index: (literal
+              (integer))))))))
