@@ -12,7 +12,7 @@
 ] @keyword.control
 
 [
-  "para"
+  "kebra"
   "kontinua"
   "divolvi"
   "tenta"

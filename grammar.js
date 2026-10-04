@@ -206,12 +206,11 @@ module.exports = grammar({
       field('initializer', $.control_initializer),
       ';',
       field('condition', $.expression),
-      ';',
-      field('update', $.expression),
+      optional(seq(';', field('update', $.expression))),
       field('body', $.compound_statement),
     ),
 
-    break_statement: _ => seq('para', ';'),
+    break_statement: _ => seq('kebra', ';'),
     continue_statement: _ => seq('kontinua', ';'),
 
     return_statement: $ => seq(

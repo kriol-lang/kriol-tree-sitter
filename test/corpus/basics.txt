@@ -339,3 +339,41 @@ fn inisiu() {
           declarator: (identifier)
           value: (literal
             (integer)))))))
+
+==================
+Two-section pa and kebra
+==================
+
+fn inisiu() {
+  pa int i = 0; i < 3 {
+    i += 1;
+    kebra;
+  }
+}
+
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (compound_statement
+      (for_statement
+        initializer: (control_initializer
+          (variable_declaration_initializer
+            type: (type)
+            declarator: (identifier)
+            value: (literal
+              (integer))))
+        condition: (binary_expression
+          left: (identifier)
+          right: (literal
+            (integer)))
+        body: (compound_statement
+          (expression_statement
+            (assignment_expression
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (literal
+                (integer))))
+          (break_statement))))))

@@ -596,7 +596,7 @@
       },
       "update": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "expression",
@@ -1652,6 +1652,10 @@
     "named": false
   },
   {
+    "type": "kebra",
+    "named": false
+  },
+  {
     "type": "kontinua",
     "named": false
   },
@@ -1677,10 +1681,6 @@
   },
   {
     "type": "pa",
-    "named": false
-  },
-  {
-    "type": "para",
     "named": false
   },
   {
