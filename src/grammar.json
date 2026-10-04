@@ -2019,6 +2019,10 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "record_literal"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "member_access_expression"
                 },
                 {

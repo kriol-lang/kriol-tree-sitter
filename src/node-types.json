@@ -1000,6 +1000,10 @@
           {
             "type": "qualified_access_expression",
             "named": true
+          },
+          {
+            "type": "record_literal",
+            "named": true
           }
         ]
       }

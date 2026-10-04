@@ -349,6 +349,7 @@ module.exports = grammar({
         $.identifier,
         $.array_access_expression,
         $.call_expression,
+        $.record_literal,
         $.member_access_expression,
         $.qualified_access_expression,
         $.parenthesized_expression,
