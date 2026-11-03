@@ -10,6 +10,13 @@ npm run generate
 npm test
 ```
 
+The keywords, builtin types, booleans and builtin functions follow
+[kriol-syntax](https://github.com/kriol-lang/kriol-syntax), the single source
+of the language syntax. `npm test` fails when `grammar.js` or
+`queries/highlights.scm` disagree with it (`npm run test:syntax` runs only that
+check). After the language changes, update the `kriol-syntax` version in
+`package.json` and then the grammar and the queries.
+
 Build an optional browser/WASM parser:
 
 ```sh
