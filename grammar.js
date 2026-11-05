@@ -24,6 +24,10 @@ module.exports = grammar({
 
   word: $ => $.identifier,
 
+  conflicts: $ => [
+    [$.if_variable_declaration_initializer, $.type],
+  ],
+
   supertypes: $ => [
     $.statement,
     $.expression,
@@ -43,6 +47,7 @@ module.exports = grammar({
       $.continue_statement,
       $.return_statement,
       $.throw_statement,
+      $.try_statement,
       $.function_declaration,
       $.molda_declaration,
       $.variable_declaration,
@@ -188,11 +193,22 @@ module.exports = grammar({
 
     if_statement: $ => prec.right(seq(
       'si',
-      optional(seq(
-        field('initializer', $.if_variable_declaration_initializer),
-        ';',
-      )),
-      field('condition', $.expression),
+      choice(
+        seq(
+          optional(seq(
+            field('initializer', $.if_variable_declaration_initializer),
+            ';',
+          )),
+          field('condition', $.expression),
+        ),
+        seq(
+          '(',
+          field('initializer', $.if_variable_declaration_initializer),
+          ';',
+          field('condition', $.expression),
+          ')',
+        ),
+      ),
       field('consequence', $.compound_statement),
       optional(seq(
         'sinon',
@@ -211,11 +227,18 @@ module.exports = grammar({
 
     for_statement: $ => seq(
       'pa',
+      choice(
+        $._for_header,
+        seq('(', $._for_header, ')'),
+      ),
+      field('body', $.compound_statement),
+    ),
+
+    _for_header: $ => seq(
       field('initializer', $.control_initializer),
       ';',
       field('condition', $.expression),
       optional(seq(';', field('update', $.expression))),
-      field('body', $.compound_statement),
     ),
 
     break_statement: _ => seq('kebra', ';'),
@@ -231,6 +254,32 @@ module.exports = grammar({
       'lansa',
       field('value', $.expression),
       ';',
+    ),
+
+    try_statement: $ => seq(
+      'spia',
+      field('body', $.compound_statement),
+      choice(
+        seq(
+          field('handler', $.catch_clause),
+          optional(field('finalizer', $.finally_clause)),
+        ),
+        field('finalizer', $.finally_clause),
+      ),
+    ),
+
+    catch_clause: $ => seq(
+      'oops',
+      choice(
+        field('parameter', $.identifier),
+        seq('(', field('parameter', $.identifier), ')'),
+      ),
+      field('body', $.compound_statement),
+    ),
+
+    finally_clause: $ => seq(
+      'sempri',
+      field('body', $.compound_statement),
     ),
 
     expression_statement: $ => seq(
@@ -301,7 +350,7 @@ module.exports = grammar({
     )),
 
     try_expression: $ => prec.right(PREC.UNARY, seq(
-      'tenta',
+      choice('tenta', 'spia'),
       field('call', $.expression),
     )),
 
@@ -338,6 +387,7 @@ module.exports = grammar({
         $.member_access_expression,
         $.qualified_access_expression,
         $.parenthesized_expression,
+        $.typed_array_literal,
       )),
       '[',
       field('index', $.expression),

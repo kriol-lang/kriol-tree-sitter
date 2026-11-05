@@ -1,0 +1,141 @@
+==================
+spia, oops and sempri
+==================
+
+fn inisiu() {
+  spia {
+    lansa Erru{mensagem = "x"};
+  } oops (err) {
+    mostran(err.mensagem);
+  } sempri {
+    mostran("fin");
+  }
+}
+
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (compound_statement
+      (try_statement
+        body: (compound_statement
+          (throw_statement
+            value: (record_literal
+              type: (type_identifier)
+              (record_field_initializer
+                name: (identifier)
+                value: (literal
+                  (string))))))
+        handler: (catch_clause
+          parameter: (identifier)
+          body: (compound_statement
+            (expression_statement
+              (call_expression
+                function: (identifier)
+                arguments: (argument_list
+                  (member_access_expression
+                    object: (identifier)
+                    member: (identifier)))))))
+        finalizer: (finally_clause
+          body: (compound_statement
+            (expression_statement
+              (call_expression
+                function: (identifier)
+                arguments: (argument_list
+                  (literal
+                    (string)))))))))))
+
+==================
+oops without parentheses, and spia with only sempri
+==================
+
+fn inisiu() {
+  spia {
+    tenta f();
+  } oops err {
+    mostran(err.tipu);
+  }
+  spia {
+    g();
+  } sempri {
+    h();
+  }
+}
+
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (compound_statement
+      (try_statement
+        body: (compound_statement
+          (expression_statement
+            (try_expression
+              call: (call_expression
+                function: (identifier)
+                arguments: (argument_list)))))
+        handler: (catch_clause
+          parameter: (identifier)
+          body: (compound_statement
+            (expression_statement
+              (call_expression
+                function: (identifier)
+                arguments: (argument_list
+                  (member_access_expression
+                    object: (identifier)
+                    member: (identifier))))))))
+      (try_statement
+        body: (compound_statement
+          (expression_statement
+            (call_expression
+              function: (identifier)
+              arguments: (argument_list))))
+        finalizer: (finally_clause
+          body: (compound_statement
+            (expression_statement
+              (call_expression
+                function: (identifier)
+                arguments: (argument_list)))))))))
+
+==================
+spia before a call passes its error on (kriol issue 35)
+==================
+
+fn media() int : Erru {
+  int x = spia int::konverti("4");
+  spia valida(x);
+  divolvi x;
+}
+
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    return_type: (type)
+    error_type: (type_identifier)
+    body: (compound_statement
+      (variable_declaration
+        (variable_declaration_initializer
+          type: (type)
+          declarator: (identifier)
+          value: (try_expression
+            call: (call_expression
+              function: (qualified_access_expression
+                member: (identifier))
+              arguments: (argument_list
+                (literal
+                  (string)))))))
+      (expression_statement
+        (try_expression
+          call: (call_expression
+            function: (identifier)
+            arguments: (argument_list
+              (identifier)))))
+      (return_statement
+        value: (identifier)))))

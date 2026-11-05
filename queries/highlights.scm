@@ -17,6 +17,9 @@
   "divolvi"
   "tenta"
   "lansa"
+  "spia"
+  "oops"
+  "sempri"
 ] @keyword.control
 
 [
@@ -63,6 +66,9 @@
 
 (parameter
   name: (identifier) @variable.parameter)
+
+(catch_clause
+  parameter: (identifier) @variable.parameter)
 
 (record_field_initializer
   name: (identifier) @property)

@@ -1,0 +1,160 @@
+==================
+Parentheses around the headers of pa and si
+==================
+
+fn inisiu() {
+  pa (int i = 0; i < 3; i += 1) {
+    kebra;
+  }
+  pa (i = 0; i < 3) {
+    kontinua;
+  }
+  si (int x = 1; x > 0) {
+  } sinon si (x == 0) {
+  }
+}
+
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (compound_statement
+      (for_statement
+        initializer: (control_initializer
+          (variable_declaration_initializer
+            type: (type)
+            declarator: (identifier)
+            value: (literal
+              (integer))))
+        condition: (binary_expression
+          left: (identifier)
+          right: (literal
+            (integer)))
+        update: (assignment_expression
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (literal
+            (integer)))
+        body: (compound_statement
+          (break_statement)))
+      (for_statement
+        initializer: (control_initializer
+          (assignment_expression
+            left: (identifier)
+            operator: (assignment_operator)
+            right: (literal
+              (integer))))
+        condition: (binary_expression
+          left: (identifier)
+          right: (literal
+            (integer)))
+        body: (compound_statement
+          (continue_statement)))
+      (if_statement
+        initializer: (if_variable_declaration_initializer
+          declarator: (identifier)
+          value: (literal
+            (integer)))
+        condition: (binary_expression
+          left: (identifier)
+          right: (literal
+            (integer)))
+        consequence: (compound_statement)
+        alternative: (if_statement
+          condition: (parenthesized_expression
+            (binary_expression
+              left: (identifier)
+              right: (literal
+                (integer))))
+          consequence: (compound_statement))))))
+
+==================
+Parentheses that start an expression stay an expression
+==================
+
+fn inisiu() {
+  pa (i) = 0; i < 3 {
+  }
+  si (int) 2.5 == 2 {
+  }
+}
+
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (compound_statement
+      (for_statement
+        initializer: (control_initializer
+          (assignment_expression
+            left: (parenthesized_expression
+              (identifier))
+            operator: (assignment_operator)
+            right: (literal
+              (integer))))
+        condition: (binary_expression
+          left: (identifier)
+          right: (literal
+            (integer)))
+        body: (compound_statement))
+      (if_statement
+        condition: (binary_expression
+          left: (cast_expression
+            type: (type)
+            value: (literal
+              (float)))
+          right: (literal
+            (integer)))
+        consequence: (compound_statement)))))
+
+==================
+Indexing a typed array literal, also inside a parenthesized header
+==================
+
+fn inisiu() {
+  int a = (int[]) [1, 2][0];
+  si ((int[]) [1, 2][1] == 2) {
+  }
+}
+
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (compound_statement
+      (variable_declaration
+        (variable_declaration_initializer
+          type: (type)
+          declarator: (identifier)
+          value: (array_access_expression
+            array: (typed_array_literal
+              type: (type)
+              value: (array_literal
+                (literal
+                  (integer))
+                (literal
+                  (integer))))
+            index: (literal
+              (integer)))))
+      (if_statement
+        condition: (parenthesized_expression
+          (binary_expression
+            left: (array_access_expression
+              array: (typed_array_literal
+                type: (type)
+                value: (array_literal
+                  (literal
+                    (integer))
+                  (literal
+                    (integer))))
+              index: (literal
+                (integer)))
+            right: (literal
+              (integer))))
+        consequence: (compound_statement)))))
