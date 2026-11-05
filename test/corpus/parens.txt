@@ -10,7 +10,7 @@ fn inisiu() {
     kontinua;
   }
   si (int x = 1; x > 0) {
-  } sinon si (x == 0) {
+  } sinau si (x == 0) {
   }
 }
 
