@@ -132,6 +132,10 @@
         "named": true
       },
       {
+        "type": "try_statement",
+        "named": true
+      },
+      {
         "type": "variable_declaration",
         "named": true
       },
@@ -194,6 +198,10 @@
           },
           {
             "type": "qualified_access_expression",
+            "named": true
+          },
+          {
+            "type": "typed_array_literal",
             "named": true
           }
         ]
@@ -525,6 +533,32 @@
     }
   },
   {
+    "type": "catch_clause",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "compound_statement",
+            "named": true
+          }
+        ]
+      },
+      "parameter": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "catch_expression",
     "named": true,
     "fields": {
@@ -610,6 +644,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "finally_clause",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "compound_statement",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1367,6 +1417,42 @@
     }
   },
   {
+    "type": "try_statement",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "compound_statement",
+            "named": true
+          }
+        ]
+      },
+      "finalizer": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "finally_clause",
+            "named": true
+          }
+        ]
+      },
+      "handler": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "catch_clause",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "type",
     "named": true,
     "fields": {},
@@ -1768,7 +1854,15 @@
     "named": false
   },
   {
+    "type": "oops",
+    "named": false
+  },
+  {
     "type": "pa",
+    "named": false
+  },
+  {
+    "type": "sempri",
     "named": false
   },
   {
@@ -1781,6 +1875,10 @@
   },
   {
     "type": "sinon",
+    "named": false
+  },
+  {
+    "type": "spia",
     "named": false
   },
   {

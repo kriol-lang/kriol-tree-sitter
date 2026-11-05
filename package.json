@@ -21,7 +21,7 @@
     "test:syntax": "node --test test/syntax.test.mjs"
   },
   "devDependencies": {
-    "kriol-syntax": "https://github.com/kriol-lang/kriol-syntax/archive/refs/tags/v0.1.0.tar.gz",
+    "kriol-syntax": "https://github.com/kriol-lang/kriol-syntax/archive/refs/tags/v0.2.0.tar.gz",
     "tree-sitter-cli": "^0.25.0"
   },
   "tree-sitter": [
