@@ -1,3 +1,6 @@
+// 'sinon' is the old spelling of 'sinau'; the compiler still accepts it, with a warning.
+const ELSE = choice('sinau', 'sinon');
+
 const PREC = {
   ASSIGN: 1,
   CATCH: 2,
@@ -211,7 +214,7 @@ module.exports = grammar({
       ),
       field('consequence', $.compound_statement),
       optional(seq(
-        'sinon',
+        ELSE,
         field('alternative', choice(
           $.compound_statement,
           $.if_statement,
@@ -345,7 +348,7 @@ module.exports = grammar({
 
     catch_expression: $ => prec.right(PREC.CATCH, seq(
       field('call', $.expression),
-      'sinon',
+      ELSE,
       field('fallback', choice($.expression, $._array_value)),
     )),
 

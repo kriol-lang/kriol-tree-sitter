@@ -4,9 +4,9 @@ Text to number conversion
 
 fn inisiu() : Erru {
   int a = tenta int::konverti(toma("n: "));
-  num b = num::konverti("2.5") sinon 0.0;
-  si int::konverti("3") sinon 0 > 2 {
-    mostran(a);
+  num b = num::konverti("2.5") sinau 0.0;
+  si int::konverti("3") sinau 0 > 2 {
+    mostraln(a);
   }
 }
 

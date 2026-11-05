@@ -846,8 +846,17 @@
                 "type": "SEQ",
                 "members": [
                   {
-                    "type": "STRING",
-                    "value": "sinon"
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": "sinau"
+                      },
+                      {
+                        "type": "STRING",
+                        "value": "sinon"
+                      }
+                    ]
                   },
                   {
                     "type": "FIELD",
@@ -1940,8 +1949,17 @@
             }
           },
           {
-            "type": "STRING",
-            "value": "sinon"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "sinau"
+              },
+              {
+                "type": "STRING",
+                "value": "sinon"
+              }
+            ]
           },
           {
             "type": "FIELD",

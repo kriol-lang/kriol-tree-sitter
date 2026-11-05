@@ -8,7 +8,7 @@ fn quad(num x) num {
 
 fn inisiu() {
   num r = quad(4.0);
-  mostran(r);
+  mostraln(r);
 }
 
 ---
@@ -54,9 +54,9 @@ fn inisiu() {
   pa int j = 0; j < 5; j += 1 {
     si int res = j; res == 3 {
       kontinua;
-    } sinon si res == 4 {
+    } sinau si res == 4 {
       mostra(res);
-    } sinon {
+    } sinau {
       mostra(res);
     }
   }
@@ -127,7 +127,7 @@ Arrays and fstrings
 fn inisiu() {
   int[3] nums = [0; 3];
   nums[1] = 7;
-  mostran(f"{nums[1]}");
+  mostraln(f"{nums[1]}");
 }
 
 ---
@@ -174,7 +174,7 @@ Prelude builtins are calls
 
 fn inisiu() {
   textu nomi = toma("Nomi: ");
-  mostran(nomi);
+  mostraln(nomi);
   konfirma(nomi != "");
   sai(0);
 }
