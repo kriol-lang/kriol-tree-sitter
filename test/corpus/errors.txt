@@ -1,5 +1,5 @@
 ==================
-Fallible functions, tenta, lansa and sinon
+Fallible functions, tenta, lansa and sinau
 ==================
 
 fn metadi(int a, int b) num : Erru {
@@ -11,7 +11,7 @@ fn metadi(int a, int b) num : Erru {
 
 fn valida(int n) : Erru {
   tenta metadi(n, 2);
-  num r = metadi(n, 0) sinon 1.5;
+  num r = metadi(n, 0) sinau 1.5;
 }
 
 ---
