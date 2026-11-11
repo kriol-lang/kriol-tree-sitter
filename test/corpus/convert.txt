@@ -3,9 +3,9 @@ Text to number conversion
 ==================
 
 fn inisiu() : Erru {
-  int a = tenta int::konverti(toma("n: "));
-  num b = num::konverti("2.5") sinon 0.0;
-  si int::konverti("3") sinon 0 > 2 {
+  int a = spia int::konverti(toma("n: "));
+  num b = spia num::konverti("2.5");
+  si spia int::konverti("3") > 2 {
     mostraln(a);
   }
 }
@@ -36,28 +36,24 @@ fn inisiu() : Erru {
         (variable_declaration_initializer
           (type)
           (identifier)
-          (catch_expression
+          (try_expression
             (call_expression
               (qualified_access_expression
                 (identifier))
               (argument_list
                 (literal
-                  (string))))
-            (literal
-              (float)))))
+                  (string)))))))
       (if_statement
-        (catch_expression
-          (call_expression
-            (qualified_access_expression
-              (identifier))
-            (argument_list
-              (literal
-                (string))))
-          (binary_expression
-            (literal
-              (integer))
-            (literal
-              (integer))))
+        (binary_expression
+          (try_expression
+            (call_expression
+              (qualified_access_expression
+                (identifier))
+              (argument_list
+                (literal
+                  (string)))))
+          (literal
+            (integer)))
         (compound_statement
           (expression_statement
             (call_expression

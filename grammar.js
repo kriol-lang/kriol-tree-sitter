@@ -1,6 +1,5 @@
 const PREC = {
   ASSIGN: 1,
-  CATCH: 2,
   OR: 3,
   AND: 4,
   EQUALITY: 5,
@@ -290,7 +289,6 @@ module.exports = grammar({
     expression: $ => choice(
       $.assignment_expression,
       $.binary_expression,
-      $.catch_expression,
       $.unary_expression,
       $.try_expression,
       $.cast_expression,
@@ -343,14 +341,8 @@ module.exports = grammar({
       ))),
     ),
 
-    catch_expression: $ => prec.right(PREC.CATCH, seq(
-      field('call', $.expression),
-      'sinon',
-      field('fallback', choice($.expression, $._array_value)),
-    )),
-
     try_expression: $ => prec.right(PREC.UNARY, seq(
-      choice('tenta', 'spia'),
+      'spia',
       field('call', $.expression),
     )),
 

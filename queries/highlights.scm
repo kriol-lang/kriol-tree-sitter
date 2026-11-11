@@ -15,7 +15,6 @@
   "kebra"
   "kontinua"
   "divolvi"
-  "tenta"
   "lansa"
   "spia"
   "oops"

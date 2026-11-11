@@ -53,7 +53,7 @@ oops without parentheses, and spia with only sempri
 
 fn inisiu() {
   spia {
-    tenta f();
+    spia f();
   } oops err {
     mostraln(err.tipu);
   }
