@@ -1240,10 +1240,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "catch_expression"
-        },
-        {
-          "type": "SYMBOL",
           "name": "unary_expression"
         },
         {
@@ -1925,44 +1921,6 @@
         }
       ]
     },
-    "catch_expression": {
-      "type": "PREC_RIGHT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "FIELD",
-            "name": "call",
-            "content": {
-              "type": "SYMBOL",
-              "name": "expression"
-            }
-          },
-          {
-            "type": "STRING",
-            "value": "sinon"
-          },
-          {
-            "type": "FIELD",
-            "name": "fallback",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "expression"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "_array_value"
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
     "try_expression": {
       "type": "PREC_RIGHT",
       "value": 12,
@@ -1970,17 +1928,8 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "tenta"
-              },
-              {
-                "type": "STRING",
-                "value": "spia"
-              }
-            ]
+            "type": "STRING",
+            "value": "spia"
           },
           {
             "type": "FIELD",

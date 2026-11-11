@@ -15,7 +15,6 @@
   "kebra"
   "kontinua"
   "divolvi"
-  "tenta"
   "lansa"
   "spia"
   "oops"
@@ -59,7 +58,7 @@
 
 (call_expression
   function: (identifier) @function.builtin
-  (#any-of? @function.builtin "mostra" "mostran" "toma" "sai" "konfirma" "paniku"))
+  (#any-of? @function.builtin "mostra" "mostraln" "mostran" "toma" "sai" "konfirma" "paniku"))
 
 (record_literal
   type: (type_identifier) @type)

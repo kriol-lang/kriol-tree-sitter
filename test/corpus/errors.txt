@@ -1,5 +1,5 @@
 ==================
-Fallible functions, tenta, lansa and sinon
+Fallible functions, spia and lansa
 ==================
 
 fn metadi(int a, int b) num : Erru {
@@ -10,8 +10,8 @@ fn metadi(int a, int b) num : Erru {
 }
 
 fn valida(int n) : Erru {
-  tenta metadi(n, 2);
-  num r = metadi(n, 0) sinon 1.5;
+  spia metadi(n, 2);
+  num r = spia metadi(n, 0);
 }
 
 ---
@@ -66,12 +66,39 @@ fn valida(int n) : Erru {
         (variable_declaration_initializer
           (type)
           (identifier)
-          (catch_expression
+          (try_expression
             (call_expression
               (identifier)
               (argument_list
                 (identifier)
                 (literal
-                  (integer))))
-            (literal
-              (float))))))))
+                  (integer))))))))))
+
+==================
+tenta is an ordinary name (kriol issue 35)
+==================
+
+fn inisiu() {
+  int tenta = 1;
+  tenta += 1;
+}
+
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (compound_statement
+      (variable_declaration
+        (variable_declaration_initializer
+          type: (type)
+          declarator: (identifier)
+          value: (literal
+            (integer))))
+      (expression_statement
+        (assignment_expression
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (literal
+            (integer)))))))

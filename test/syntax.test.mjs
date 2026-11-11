@@ -10,6 +10,7 @@ import {
   builtinTypes,
   controlKeywords,
   declarationKeywords,
+  deprecatedWords,
 } from 'kriol-syntax';
 
 const highlights = readFileSync(new URL('../queries/highlights.scm', import.meta.url), 'utf8');
@@ -31,17 +32,26 @@ function anyOfWords(capture) {
   return predicate ? quotedWords(predicate[1]) : [];
 }
 
+// The words and the old spellings of them, which still compile with a warning,
+// so the grammar parses them and the queries colour them like their replacement.
+function withOldSpellings(words) {
+  const oldSpellings = Object.entries(deprecatedWords)
+    .filter(([, replacement]) => words.includes(replacement))
+    .map(([oldName]) => oldName);
+  return [...words, ...oldSpellings];
+}
+
 function assertSameWords(actual, expected) {
   assert.deepEqual([...actual].sort(), [...expected].sort());
 }
 
 describe('highlight queries', () => {
   it('highlight the declaration keywords', () => {
-    assertSameWords(groupWords('@keyword'), declarationKeywords);
+    assertSameWords(groupWords('@keyword'), withOldSpellings(declarationKeywords));
   });
 
   it('highlight the control keywords', () => {
-    assertSameWords(groupWords('@keyword.control'), controlKeywords);
+    assertSameWords(groupWords('@keyword.control'), withOldSpellings(controlKeywords));
   });
 
   it('highlight the builtin types', () => {
@@ -53,13 +63,13 @@ describe('highlight queries', () => {
   });
 
   it('highlight the builtin functions', () => {
-    assertSameWords(anyOfWords('@function.builtin'), builtinFunctions);
+    assertSameWords(anyOfWords('@function.builtin'), withOldSpellings(builtinFunctions));
   });
 });
 
 describe('grammar', () => {
   it('knows every keyword, builtin type and boolean', () => {
-    const missing = [...declarationKeywords, ...controlKeywords, ...builtinTypes, ...booleans]
+    const missing = [...withOldSpellings(declarationKeywords), ...withOldSpellings(controlKeywords), ...builtinTypes, ...booleans]
       .filter((word) => !grammar.includes(`'${word}'`));
 
     assert.deepEqual(missing, []);
