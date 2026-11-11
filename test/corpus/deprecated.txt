@@ -1,0 +1,48 @@
+==============================================
+Old spelling mostran still parses
+==============================================
+
+fn inisiu() {
+  si sin {
+    mostran("a");
+  } sinon si nau {
+    mostra("b");
+  } sinon {
+    mostran("c");
+  }
+}
+
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (compound_statement
+      (if_statement
+        condition: (literal
+          (boolean))
+        consequence: (compound_statement
+          (expression_statement
+            (call_expression
+              function: (identifier)
+              arguments: (argument_list
+                (literal
+                  (string))))))
+        alternative: (if_statement
+          condition: (literal
+            (boolean))
+          consequence: (compound_statement
+            (expression_statement
+              (call_expression
+                function: (identifier)
+                arguments: (argument_list
+                  (literal
+                    (string))))))
+          alternative: (compound_statement
+            (expression_statement
+              (call_expression
+                function: (identifier)
+                arguments: (argument_list
+                  (literal
+                    (string)))))))))))

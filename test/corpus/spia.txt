@@ -6,9 +6,9 @@ fn inisiu() {
   spia {
     lansa Erru{mensagem = "x"};
   } oops (err) {
-    mostran(err.mensagem);
+    mostraln(err.mensagem);
   } sempri {
-    mostran("fin");
+    mostraln("fin");
   }
 }
 
@@ -55,7 +55,7 @@ fn inisiu() {
   spia {
     tenta f();
   } oops err {
-    mostran(err.tipu);
+    mostraln(err.tipu);
   }
   spia {
     g();
